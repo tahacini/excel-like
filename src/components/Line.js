@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import EditableBox from './EditableBox';
 import HeaderBox from './HeaderBox';
 import BtnContainer from './BtnContainer';
@@ -11,9 +11,11 @@ const Line = ({
   handleAdd,
   handleDel,
 }) => {
-  const afterDiscount = rowData.afterDiscount
-    ? rowData.afterDiscount
-    : rowData.unitEx + rowData.discount;
+  useEffect(() => {
+    handleChange('', '', rowIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="row-line">
       <BtnContainer
@@ -30,7 +32,7 @@ const Line = ({
         value={rowData.discount}
         onChange={(newValue) => handleChange(newValue, 'discount', rowIndex)}
       />
-      <EditableBox disabled value={afterDiscount} />
+      <EditableBox disabled value={rowData.afterDiscount} />
       <EditableBox
         value={rowData.amount}
         onChange={(newValue) => handleChange(newValue, 'amount', rowIndex)}
@@ -48,6 +50,8 @@ const Line = ({
       />
       <EditableBox disabled value={rowData.totalEx} />
       <EditableBox disabled value={rowData.total} />
+      <EditableBox disabled value={rowData.totalWithoutDiscount} />
+      <EditableBox disabled value={rowData.discountAmountWithVat} />
     </div>
   );
 };

@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
-import { Line, Header } from './components';
+import { Line, Header, AddModal } from './components';
+import {
+  handleDiscount,
+  handleMargin,
+  handleTotalEx,
+  handleTotal,
+  handletotalWithoutDiscount,
+  handleDiscountAmountWithVat,
+} from './utils/utils';
 import './App.css';
 
-const x = 10;
 function App() {
+  const [modal, setModal] = useState(false);
   const [header] = useState([
     { label: 'Unit Ex', key: 'unitEx' },
     { label: 'Discount %', key: 'discount' },
@@ -14,6 +22,8 @@ function App() {
     { label: 'Vat %', key: 'vat' },
     { label: 'Total Ex', key: 'totalEx' },
     { label: 'Total', key: 'total' },
+    { label: 'Total Without Discount', key: 'totalWithoutDiscount' },
+    { label: 'Discount Amount With Vat', key: 'discountAmountWithVat' },
   ]);
   const [arr, setArr] = useState([
     {
@@ -27,49 +37,40 @@ function App() {
       vat: 21,
       totalEx: undefined,
       total: undefined,
+      totalWithoutDiscount: undefined,
+      discountAmountWithVat: undefined,
     },
   ]);
-
-  const times = (num) => num * x;
-
-  const handleDiscount = (num1, num2) => {
-    const result = (times(num1) - (times(num1) / times(100)) * times(num2)) / x;
-    return result;
-  };
-
-  const handleMargin = (num1, num2) => {
-    const result =
-      (((times(num1) - times(num2)) / times(num2)) * times(100)) / x;
-    return result;
-  };
-
-  const handleTotalEx = (num1, num2) => {
-    const result = num1 * num2;
-    return result;
-  };
-
-  const handleTotal = (num1, num2) => {
-    const result = (times(num1) * (times(num2) / times(100) + 1)) / x;
-    return result;
-  };
 
   const handleChange = (newValue, selectedItem, index) => {
     const newArr = arr.map((el, newIndex) => {
       if (newIndex === index) {
+        const shoudAdd = selectedItem && { [selectedItem]: newValue * 1 };
         const newObj = {
           ...el,
-          [selectedItem]: newValue,
+          ...shoudAdd,
         };
         const afterDiscount = handleDiscount(newObj.unitEx, newObj.discount);
         const margin = handleMargin(afterDiscount, newObj.purchasePrice);
         const totalEx = handleTotalEx(afterDiscount, newObj.amount);
         const total = handleTotal(totalEx, newObj.vat);
+        const totalWithoutDiscount = handletotalWithoutDiscount(
+          newObj.unitEx,
+          newObj.amount,
+          newObj.vat
+        );
+        const discountAmountWithVat = handleDiscountAmountWithVat(
+          totalWithoutDiscount,
+          total
+        );
         return {
           ...newObj,
           afterDiscount,
           margin,
           totalEx,
           total,
+          totalWithoutDiscount,
+          discountAmountWithVat,
         };
       }
       return el;
@@ -77,24 +78,27 @@ function App() {
     setArr(newArr);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (productName) => {
+    if (!productName) return;
+
     setArr((el) => {
       return [
         ...el,
         {
-          productName: 'Product B',
-          unitEx: 78.18,
-          discount: 8,
+          productName,
+          unitEx: undefined,
+          discount: undefined,
           afterDiscount: undefined,
-          amount: 3,
-          purchasePrice: 50.45,
+          amount: undefined,
+          purchasePrice: undefined,
           margin: undefined,
-          vat: 21,
+          vat: undefined,
           totalEx: undefined,
           total: undefined,
         },
       ];
     });
+    setModal(false);
   };
 
   const handleDel = (selectedIndex) => {
@@ -103,27 +107,42 @@ function App() {
     });
   };
 
+  const openModal = () => setModal(true);
+
   return (
     <div className="App">
       <div className="grid-container">
-        <Header rowData={header} />
-        {arr.map((el, index) => {
-          const arrLenght = arr.length;
-          const addBtn =
-            arrLenght === 1 ? 'BOTH' : arrLenght - 1 === index ? 'ADD' : false;
-          return (
-            <Line
-              key={`line-${index}`}
-              rowData={el}
-              rowIndex={index}
-              handleChange={handleChange}
-              addBtn={addBtn}
-              handleAdd={handleAdd}
-              handleDel={() => handleDel(index)}
-            />
-          );
-        })}
+        <div>
+          <Header
+            rowData={header}
+            handleAdd={openModal}
+            isAddOpen={arr.length}
+          />
+          {arr.map((el, index) => {
+            const arrLenght = arr.length;
+            const addBtn =
+              arrLenght === 1
+                ? 'BOTH'
+                : arrLenght - 1 === index
+                ? 'ADD'
+                : false;
+            return (
+              <Line
+                key={`line-${index}`}
+                rowData={el}
+                rowIndex={index}
+                handleChange={handleChange}
+                addBtn={addBtn}
+                handleAdd={openModal}
+                handleDel={() => handleDel(index)}
+              />
+            );
+          })}
+        </div>
       </div>
+      {modal && (
+        <AddModal onSubmit={handleAdd} onCancel={() => setModal(false)} />
+      )}
     </div>
   );
 }

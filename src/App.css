@@ -13,7 +13,9 @@
 .App {
   height: 100%;
   display: grid;
-  place-items: center;
+  padding-top: 8rem;
+  justify-items: center;
+  align-items: flex-start;
 }
 
 .row-line {
@@ -45,7 +47,8 @@ input[type='number'] {
 
 .grid-container {
   display: grid;
-  width: 80%;
+  place-items: center;
+  width: 75%;
 }
 
 .add-btn {
@@ -81,4 +84,54 @@ input[type='number'] {
 
 .both-btn > * {
   position: unset;
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.modal-container {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 1000;
+  padding: 3rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.btn-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.modal-container input {
+  width: 15rem;
+  height: 2rem;
+  border-radius: 8px;
+}
+
+.add-product-btn {
+  width: 100%;
+  background-color: rgb(67, 67, 243);
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+  border-radius: 8px;
+}
+
+.btn-red {
+  background-color: rgb(237, 45, 45);
 }

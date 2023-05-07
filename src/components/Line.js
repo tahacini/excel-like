@@ -1,13 +1,26 @@
 import React from 'react';
 import EditableBox from './EditableBox';
 import HeaderBox from './HeaderBox';
+import BtnContainer from './BtnContainer';
 
-const Line = ({ rowData, rowIndex, handleChange }) => {
+const Line = ({
+  rowData,
+  rowIndex,
+  handleChange,
+  addBtn,
+  handleAdd,
+  handleDel,
+}) => {
   const afterDiscount = rowData.afterDiscount
     ? rowData.afterDiscount
     : rowData.unitEx + rowData.discount;
   return (
     <div className="row-line">
+      <BtnContainer
+        addBtn={addBtn}
+        handleAdd={handleAdd}
+        handleDel={handleDel}
+      />
       <HeaderBox name={rowData.productName} />
       <EditableBox
         value={rowData.unitEx}

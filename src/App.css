@@ -18,6 +18,7 @@
 
 .row-line {
   display: flex;
+  position: relative;
 }
 
 input {
@@ -44,5 +45,40 @@ input[type='number'] {
 
 .grid-container {
   display: grid;
-  padding: 0 5rem;
+  width: 80%;
+}
+
+.add-btn {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 21px;
+  left: -3rem;
+  cursor: pointer;
+  background-color: green;
+  color: white;
+}
+
+.delete-btn {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 21px;
+  left: -3rem;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+}
+
+.both-btn {
+  position: absolute;
+  display: flex;
+  width: 6rem;
+  left: -6rem;
+}
+
+.both-btn > * {
+  position: unset;
 }

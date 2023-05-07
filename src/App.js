@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Line, Header } from './components';
 import './App.css';
+
 const x = 10;
 function App() {
   const [header] = useState([
@@ -76,18 +77,52 @@ function App() {
     setArr(newArr);
   };
 
+  const handleAdd = () => {
+    setArr((el) => {
+      return [
+        ...el,
+        {
+          productName: 'Product B',
+          unitEx: 78.18,
+          discount: 8,
+          afterDiscount: undefined,
+          amount: 3,
+          purchasePrice: 50.45,
+          margin: undefined,
+          vat: 21,
+          totalEx: undefined,
+          total: undefined,
+        },
+      ];
+    });
+  };
+
+  const handleDel = (selectedIndex) => {
+    setArr((el) => {
+      return el.filter((_, rowIndex) => rowIndex !== selectedIndex);
+    });
+  };
+
   return (
     <div className="App">
       <div className="grid-container">
         <Header rowData={header} />
-        {arr.map((el, index) => (
-          <Line
-            key={`line-${index}`}
-            rowData={el}
-            rowIndex={index}
-            handleChange={handleChange}
-          />
-        ))}
+        {arr.map((el, index) => {
+          const arrLenght = arr.length;
+          const addBtn =
+            arrLenght === 1 ? 'BOTH' : arrLenght - 1 === index ? 'ADD' : false;
+          return (
+            <Line
+              key={`line-${index}`}
+              rowData={el}
+              rowIndex={index}
+              handleChange={handleChange}
+              addBtn={addBtn}
+              handleAdd={handleAdd}
+              handleDel={() => handleDel(index)}
+            />
+          );
+        })}
       </div>
     </div>
   );

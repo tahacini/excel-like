@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Line, Header, AddModal } from './components';
+import { Line, Header, AddModal, TotalTable } from './components';
 import {
   handleDiscount,
   handleMargin,
@@ -30,11 +30,11 @@ function App() {
       productName: 'Product A',
       unitEx: 12.64,
       discount: 11,
-      afterDiscount: undefined,
       amount: 4,
       purchasePrice: 7.45,
-      margin: undefined,
       vat: 21,
+      afterDiscount: undefined,
+      margin: undefined,
       totalEx: undefined,
       total: undefined,
       totalWithoutDiscount: undefined,
@@ -45,7 +45,7 @@ function App() {
   const handleChange = (newValue, selectedItem, index) => {
     const newArr = arr.map((el, newIndex) => {
       if (newIndex === index) {
-        const shoudAdd = selectedItem && { [selectedItem]: newValue * 1 };
+        const shoudAdd = selectedItem && { [selectedItem]: newValue };
         const newObj = {
           ...el,
           ...shoudAdd,
@@ -140,6 +140,7 @@ function App() {
           })}
         </div>
       </div>
+      <TotalTable />
       {modal && (
         <AddModal onSubmit={handleAdd} onCancel={() => setModal(false)} />
       )}

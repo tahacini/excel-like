@@ -135,3 +135,17 @@ input[type='number'] {
 .btn-red {
   background-color: rgb(237, 45, 45);
 }
+
+.total-row-container {
+  width: 75%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.total-row {
+  display: flex;
+}
+
+.total-row .header-input-container input {
+  width: 13rem;
+}

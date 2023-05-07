@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const AddModal = ({ onSubmit, onCancel }) => {
   const [product, setProduct] = useState('');
   return (
-    <div>
+    <>
       <div className="modal-background" />
       <div className="modal-container">
         <div>
@@ -22,7 +22,7 @@ const AddModal = ({ onSubmit, onCancel }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

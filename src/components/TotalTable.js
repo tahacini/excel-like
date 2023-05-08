@@ -34,7 +34,7 @@ const TotalTable = () => {
         </div>
         <div className="total-row">
           <HeaderBox name={'Margin Total %'} />
-          <EditableBox disabled value={totalArr.marginTotal} />
+          <EditableBox disabled value={totalArr.marginTotal || 0} />
         </div>
         <div className="total-row total-row-other">
           <HeaderBox name={'Total Discount Amount with Vat'} />

@@ -13,7 +13,6 @@ const Header = ({ handleAdd }) => {
   return (
     <div className="row-line">
       {!isAddOpen && <BtnContainer whichBtn={'ADD'} handleAdd={handleAdd} />}
-      <HeaderBox name={''} />
       {headerData.map((el, index) => (
         <HeaderBox key={`header-${index}`} name={el.label} />
       ))}

@@ -5,7 +5,6 @@ import './App.css';
 
 function App() {
   const [modal, setModal] = useState(false);
-
   const openModal = () => setModal(true);
 
   return (

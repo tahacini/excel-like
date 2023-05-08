@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import CsvBtn from './CsvBtn';
 import { selectTableData } from './../redux/features/table/tableSlice';
 import { HeaderBox, EditableBox } from './index';
 import { handleTotalTable } from '../utils/utils';
@@ -44,6 +45,7 @@ const TotalTable = () => {
           <EditableBox disabled value={totalArr.grandTotal} />
         </div>
       </div>
+      <CsvBtn />
     </div>
   );
 };

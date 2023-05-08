@@ -12,7 +12,7 @@ const Line = ({
   handleDel,
 }) => {
   return (
-    <div className="row-line">
+    <div className={`row-line ${rowIndex % 2 === 0 && 'row-line-other'}`}>
       <BtnContainer
         whichBtn={whichBtn}
         handleAdd={handleAdd}

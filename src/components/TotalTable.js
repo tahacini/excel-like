@@ -28,7 +28,7 @@ const TotalTable = () => {
           <HeaderBox name={'Total Ex'} />
           <EditableBox disabled value={totalArr.totalEx} />
         </div>
-        <div className="total-row">
+        <div className="total-row total-row-other">
           <HeaderBox name={'Total Vat'} />
           <EditableBox disabled value={totalArr.totalVat} />
         </div>
@@ -36,7 +36,7 @@ const TotalTable = () => {
           <HeaderBox name={'Margin Total %'} />
           <EditableBox disabled value={totalArr.marginTotal} />
         </div>
-        <div className="total-row">
+        <div className="total-row total-row-other">
           <HeaderBox name={'Total Discount Amount with Vat'} />
           <EditableBox disabled value={totalArr.totalDiscountAmountWithVat} />
         </div>

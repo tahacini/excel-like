@@ -8,14 +8,14 @@ const CsvBtn = () => {
   const rowData = useSelector(selectTableData);
   const headerData = useSelector(selectHeaders);
 
-  const csvReport = {
+  const csvData = {
     data: rowData,
     headers: headerData,
     filename: 'products.csv',
   };
   return (
     <div>
-      <CSVLink {...csvReport}>
+      <CSVLink {...csvData}>
         <button className="export-btn">Export To CSV</button>
       </CSVLink>
     </div>

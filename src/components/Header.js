@@ -11,7 +11,7 @@ const Header = ({ handleAdd }) => {
   const isAddOpen = useSelector(tableLenght);
 
   return (
-    <div className="row-line">
+    <div className={`row-line ${!isAddOpen && 'just-header'}`}>
       {!isAddOpen && <BtnContainer whichBtn={'ADD'} handleAdd={handleAdd} />}
       {headerData.map((el, index) => (
         <HeaderBox key={`header-${index}`} name={el.label} />

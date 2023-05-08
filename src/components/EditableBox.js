@@ -12,8 +12,9 @@ const EditableBox = ({ value, onChange, disabled }) => {
   };
 
   return (
-    <div>
+    <div className="box-border-container">
       <input
+        className="box-border"
         disabled={disabled}
         type="number"
         value={value}

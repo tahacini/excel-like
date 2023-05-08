@@ -8,21 +8,21 @@ const BtnContainer = ({ whichBtn, handleAdd, handleDel }) => {
       {whichBtn === BOTH && (
         <div className="both-btn">
           <div className="add-btn" onClick={handleAdd}>
-            ADD
+            <i class="fas fa-plus"></i>
           </div>
           <div className="delete-btn" onClick={handleDel}>
-            DEL
+            <i class="fas fa-trash"></i>
           </div>
         </div>
       )}
       {whichBtn === ADD && (
         <div className="add-btn" onClick={handleAdd}>
-          ADD
+          <i class="fas fa-plus"></i>
         </div>
       )}
       {!whichBtn && (
         <div className="delete-btn" onClick={handleDel}>
-          DEL
+          <i class="fas fa-trash"></i>
         </div>
       )}
     </>

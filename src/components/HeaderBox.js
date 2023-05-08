@@ -3,7 +3,7 @@ import React from 'react';
 const HeaderBox = ({ name }) => {
   return (
     <div className="header-input-container">
-      <input value={name} disabled />
+      <input className="header-border" value={name} disabled />
     </div>
   );
 };

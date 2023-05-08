@@ -59,3 +59,37 @@ export const handleTotalTable = (data) => {
     grandTotal,
   };
 };
+
+export const handleChange = (data, newValue, selectedItem, index) => {
+  return data.map((el, newIndex) => {
+    if (newIndex === index) {
+      const newObj = {
+        ...el,
+        [selectedItem]: newValue,
+      };
+      const afterDiscount = handleDiscount(newObj.unitEx, newObj.discount);
+      const margin = handleMargin(afterDiscount, newObj.purchasePrice);
+      const totalEx = handleTotalEx(afterDiscount, newObj.amount);
+      const total = handleTotal(totalEx, newObj.vat);
+      const totalWithoutDiscount = handletotalWithoutDiscount(
+        newObj.unitEx,
+        newObj.amount,
+        newObj.vat
+      );
+      const discountAmountWithVat = handleDiscountAmountWithVat(
+        totalWithoutDiscount,
+        total
+      );
+      return {
+        ...newObj,
+        afterDiscount,
+        margin,
+        totalEx,
+        total,
+        totalWithoutDiscount,
+        discountAmountWithVat,
+      };
+    }
+    return el;
+  });
+};

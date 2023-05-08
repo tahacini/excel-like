@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-const AddModal = ({ onSubmit, onCancel }) => {
+import { addRow } from './../redux/features/table/tableSlice';
+
+const AddModal = ({ closeModal }) => {
   const [product, setProduct] = useState('');
+  const dispatch = useDispatch();
+
+  const handleAdd = (productName) => {
+    if (!productName) return;
+
+    dispatch(addRow(productName));
+    closeModal();
+  };
+
+  const onCancel = () => {
+    setProduct('');
+    closeModal();
+  };
+
   return (
     <>
       <div className="modal-background" />
@@ -17,7 +34,7 @@ const AddModal = ({ onSubmit, onCancel }) => {
           <div onClick={onCancel} className="add-product-btn btn-red">
             Cancel
           </div>
-          <div onClick={() => onSubmit(product)} className="add-product-btn">
+          <div onClick={() => handleAdd(product)} className="add-product-btn">
             Add Product
           </div>
         </div>

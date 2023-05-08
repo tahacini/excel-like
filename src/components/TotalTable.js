@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+import { selectTableData } from './../redux/features/table/tableSlice';
 import { HeaderBox, EditableBox } from './index';
 import { handleTotalTable } from '../utils/utils';
 
-const TotalTable = ({ data }) => {
+const TotalTable = () => {
+  const rowData = useSelector(selectTableData);
   const [totalArr, setTotalArr] = useState({
     totalEx: undefined,
     totalVat: undefined,
@@ -12,9 +16,9 @@ const TotalTable = ({ data }) => {
   });
 
   useEffect(() => {
-    const totalObj = handleTotalTable(data);
+    const totalObj = handleTotalTable(rowData);
     setTotalArr(totalObj);
-  }, [data]);
+  }, [rowData]);
 
   return (
     <div className="total-row-container">

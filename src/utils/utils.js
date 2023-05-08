@@ -31,3 +31,31 @@ export const handleDiscountAmountWithVat = (num1, num2) => {
   const result = (times(num1) - times(num2)) / x;
   return result;
 };
+
+export const handleTotalTable = (data) => {
+  let grandTotal = 0;
+  let totalEx = 0;
+  let totalDiscountAmountWithVat = 0;
+  let amountMultiplyPurchasePrice = 0;
+
+  data.forEach((el) => {
+    totalEx += el.totalEx || 0;
+    grandTotal += el.total || 0;
+    totalDiscountAmountWithVat += el.discountAmountWithVat || 0;
+    amountMultiplyPurchasePrice += (el.amount || 0) * (el.purchasePrice || 0);
+  });
+  let totalVat = grandTotal - totalEx;
+  let marginTotal =
+    (((times(totalEx) - times(amountMultiplyPurchasePrice)) /
+      times(amountMultiplyPurchasePrice)) *
+      times(100)) /
+    10;
+
+  return {
+    totalEx,
+    totalVat,
+    marginTotal,
+    totalDiscountAmountWithVat,
+    grandTotal,
+  };
+};

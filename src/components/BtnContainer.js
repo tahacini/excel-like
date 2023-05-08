@@ -2,10 +2,10 @@ import React from 'react';
 
 const BOTH = 'BOTH';
 const ADD = 'ADD';
-const BtnContainer = ({ addBtn, handleAdd, handleDel }) => {
+const BtnContainer = ({ whichBtn, handleAdd, handleDel }) => {
   return (
     <>
-      {addBtn === BOTH && (
+      {whichBtn === BOTH && (
         <div className="both-btn">
           <div className="add-btn" onClick={handleAdd}>
             ADD
@@ -15,12 +15,12 @@ const BtnContainer = ({ addBtn, handleAdd, handleDel }) => {
           </div>
         </div>
       )}
-      {addBtn === ADD && (
+      {whichBtn === ADD && (
         <div className="add-btn" onClick={handleAdd}>
           ADD
         </div>
       )}
-      {!addBtn && (
+      {!whichBtn && (
         <div className="delete-btn" onClick={handleDel}>
           DEL
         </div>

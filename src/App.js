@@ -45,10 +45,9 @@ function App() {
   const handleChange = (newValue, selectedItem, index) => {
     const newArr = arr.map((el, newIndex) => {
       if (newIndex === index) {
-        const shoudAdd = selectedItem && { [selectedItem]: newValue };
         const newObj = {
           ...el,
-          ...shoudAdd,
+          [selectedItem]: newValue,
         };
         const afterDiscount = handleDiscount(newObj.unitEx, newObj.discount);
         const margin = handleMargin(afterDiscount, newObj.purchasePrice);
@@ -120,19 +119,15 @@ function App() {
           />
           {arr.map((el, index) => {
             const arrLenght = arr.length;
-            const addBtn =
-              arrLenght === 1
-                ? 'BOTH'
-                : arrLenght - 1 === index
-                ? 'ADD'
-                : false;
+            const whichBtn =
+              arrLenght === 1 || arrLenght - 1 === index ? 'BOTH' : false;
             return (
               <Line
                 key={`line-${index}`}
                 rowData={el}
                 rowIndex={index}
                 handleChange={handleChange}
-                addBtn={addBtn}
+                whichBtn={whichBtn}
                 handleAdd={openModal}
                 handleDel={() => handleDel(index)}
               />
@@ -140,7 +135,7 @@ function App() {
           })}
         </div>
       </div>
-      <TotalTable />
+      <TotalTable data={arr} />
       {modal && (
         <AddModal onSubmit={handleAdd} onCancel={() => setModal(false)} />
       )}

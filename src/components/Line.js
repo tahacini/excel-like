@@ -7,7 +7,7 @@ const Line = ({
   rowData,
   rowIndex,
   handleChange,
-  addBtn,
+  whichBtn,
   handleAdd,
   handleDel,
 }) => {
@@ -19,7 +19,7 @@ const Line = ({
   return (
     <div className="row-line">
       <BtnContainer
-        addBtn={addBtn}
+        whichBtn={whichBtn}
         handleAdd={handleAdd}
         handleDel={handleDel}
       />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import EditableBox from './EditableBox';
 import HeaderBox from './HeaderBox';
 import BtnContainer from './BtnContainer';
@@ -11,11 +11,6 @@ const Line = ({
   handleAdd,
   handleDel,
 }) => {
-  useEffect(() => {
-    handleChange('', '', rowIndex);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="row-line">
       <BtnContainer
